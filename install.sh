@@ -2,7 +2,7 @@
 # TODO dimas Kam 06 Jun 2019 10:45:50  WIB
 # - cek vim and gvim are installed belum
 echo "installing and configuring vim "
-cp -r .vim ~
+cp -r .vim ~ && mkdir ~/.vim/plugged
 echo "1. copying folder .vim  to ~ is done"
 cp .vimrc ~
 echo "2. copying .vimrc to ~ is done"
