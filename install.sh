@@ -13,7 +13,9 @@ curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 echo "4. make autoload folder on .vim and downloading vim-plug are done"
 vim +'PlugInstall --sync' +qa
-echo"5. installing plugin on vimplug is done"
+echo "5. installing plugin on vimplug is done"
+sudo apt install build-essential cmake python3-dev && cd ~/.vim/plugged/youcompleteme && python3 install.py --clang-completer
+echo "5.a. install requirement for youcompleteme is done"
 echo "6. checking if nvim is installed"
 if [ -d "~/.config/nvim" ]
 then
@@ -22,7 +24,7 @@ then
 	echo "8. make symlink is done"
 else
 	echo "7. nvim is not installed, will install it first then make symlink"
-	sudo apt install nvim nvim-qt -y && ln -s .vimrc ~/.config/nvim/init.vim
+	sudo apt install nvim nvim-qt neovim -y && ln -s .vimrc ~/.config/nvim/init.vim
 	curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
 		https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 	echo "8. installing and configuring is done"
