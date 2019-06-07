@@ -8,7 +8,8 @@ set autoindent		" always set autoindent on
 set ruler
 set number relativenumber
 set cursorline
-set cursorcolumn
+"set cursorcolumn
+set colorcolumn=80
 set guifont=Fira\ Code\ Retina\ 12
 set nobackup       "no backup files
 set nowritebackup  "only in case you don't want a backup file while editing
@@ -21,7 +22,7 @@ set hlsearch
 set incsearch
 syntax on
 let mapleader = '\'
-filetype plugin on 			" use the file type plugins
+filetype indent plugin on 			" use the file type plugins
 
 " set tabs stop & indent
 set tabstop=4
@@ -163,6 +164,8 @@ Plug 'godlygeek/tabular'
 Plug 'jiangmiao/auto-pairs'
 "css color
 Plug 'ap/vim-css-color'
+" vim-blade
+Plug 'jwalton512/vim-blade'
 
 " initialize plugin system
 call plug#end()
@@ -193,17 +196,31 @@ let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
 " indent guide
 "let g:indentLine_char_list = ['|', '¦', '┆', '┊']
+"
 " Vim
 "let g:indentLine_color_term = 0
+"
 " GVim
 "let g:indentLine_color_gui = '#A4E57E'
 " none X terminal
 "let g:indentLine_color_tty_light = 7 " (default: 4)
 "let g:indentLine_color_dark = 1 " (default: 2)
+"
 " Background (Vim, GVim)
 "let g:indentLine_bgcolor_term = 202
 "let g:indentLine_bgcolor_gui = '#FF5F00'
 " indentline will overwrite your conceal cursor and conceallevel with default
+"
 " value
 let g:indentLine_concealcursor = 'inc'
 let g:indentLine_conceallevel = 2
+"
+" vim-blade
+" Define some single Blade directives. This variable is used for highlighting only.
+let g:blade_custom_directives = ['datetime', 'javascript']
+"
+" Define pairs of Blade directives. This variable is used for highlighting and indentation.
+let g:blade_custom_directives_pairs = {
+      \   'markdown': 'endmarkdown',
+      \   'cache': 'endcache',
+      \ }
