@@ -19,6 +19,7 @@ set showmode
 set showmatch
 set smarttab
 set hlsearch
+"set spell
 set incsearch
 syntax on
 let mapleader = '\'
