@@ -1,8 +1,7 @@
-
 "	general			"
 """""""""""""""""""""""""""""""""
 " others
-set bg=dark
+" set bg=dark
 set ai			" autoindent
 set autoindent		" always set autoindent on
 set ruler
@@ -10,18 +9,28 @@ set number relativenumber
 set cursorline
 "set cursorcolumn
 set colorcolumn=80
-set guifont=Fira\ Code\ Retina\ 12
+" set guifont=Fira\ Code\ Retina\ 12
+" set guifont=Inconsolata\-g:h14
+" set guifont=Fantasque\ Sans\ Mono:h13
+if has('nvim')
+	set guifont=Fantasque\ Sans\ Mono:h13
+	" set guifont=inconsolata\-g\ g:h13
+else
+	" set guifont=Fira\ Code\ Retina\ 12
+	set guifont=inconsolata\-g\ medium\ 13
+endif
 set nobackup       "no backup files
 set nowritebackup  "only in case you don't want a backup file while editing
 set noswapfile     "no swap files
 set clipboard=unnamedplus
 set showmode
 set showmatch
+set matchtime=3
 set smarttab
 set hlsearch
 "set spell
 set incsearch
-syntax on
+" set syntax
 let mapleader = '\'
 filetype indent plugin on 			" use the file type plugins
 
@@ -39,7 +48,8 @@ imap jk <Esc>
 
 " Hide gui toolbar
 if has("gui_running")
-  set guioptions=eg
+	"set guioptions=egmrt
+	set guioptions=egtm
 endif
 
 " colorscheme
@@ -50,7 +60,7 @@ colorscheme challenger_deep
 
 " enable true color
 if has('nvim') || has('termguicolors')
-  set termguicolors
+	set termguicolors
 endif
 
 " insert date using F5
@@ -59,6 +69,7 @@ endif
 
 " run python from buffer
 :nnoremap <buffer> <F9> :exec '!python3' shellescape(@%, 1)<cr>
+" :nnoremap <buffer> <F9> :exec '!source env/bin/activate && python3' shellescape(@%, 1)<cr>
 
 " statusline
 "set statusline+=%y      "filetype
@@ -68,10 +79,10 @@ nmap <C-k> O<Esc>j
 nmap <C-j> o<Esc>k"
 
 " move line using shift + up / down
-nnoremap <S-Up> :m-2<CR>
-nnoremap <S-Down> :m+<CR>
-inoremap <S-Up> <Esc>:m-2<CR>
-inoremap <S-Down> <Esc>:m+<CR>
+" nnoremap <S-Up> :m-2<CR>
+" nnoremap <S-Down> :m+<CR>
+" inoremap <S-Up> <Esc>:m-2<CR>
+" inoremap <S-Down> <Esc>:m+<CR>
 " zoom in/out windows
 noremap Zz <c-w>_ \| <c-w>\|
 noremap Zo <c-w>=
@@ -118,6 +129,22 @@ nnoremap <leader>rc :tabnew $MYVIMRC<CR>
 " reload vimrc
 nnoremap <leader>rv :source $MYVIMRC<CR>
 
+" moving line using alt j or k key
+nnoremap <A-j> :m .+1<CR>==
+nnoremap <A-k> :m .-2<CR>==
+inoremap <A-j> <Esc>:m .+1<CR>==gi
+inoremap <A-k> <Esc>:m .-2<CR>==gi
+vnoremap <A-j> :m '>+1<CR>gv=gv
+vnoremap <A-k> :m '<-2<CR>gv=gv
+
+" change filetype shortcut
+nnoremap <leader><leader>h :set filetype:html<CR>
+nnoremap <leader><leader>p :set filetype:php<CR>
+nnoremap <leader><leader>j :set filetype:javascript<CR>
+nnoremap <leader><leader>c :set filetype:css<CR>
+nnoremap <leader><leader>b :set filetype:blade<CR>
+nnoremap <leader><leader>y :set filetype:python<CR>
+
 
 """""""""""""""""""""""""""""""""
 "	vim-plug		"
@@ -134,7 +161,8 @@ Plug 'tpope/vim-surround'
 " easymotion
 Plug 'easymotion/vim-easymotion'
 " ctrlp
-Plug 'kien/ctrlp.vim'
+" Plug 'kien/ctrlp.vim'
+Plug 'junegunn/fzf'
 " nerd commenter
 Plug 'scrooloose/nerdcommenter'
 " challenger deep
@@ -151,8 +179,10 @@ Plug 'majutsushi/tagbar'
 Plug 'valloric/youcompleteme'
 " python mode
 Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
+" matchup
+Plug 'andymass/vim-matchup'
 " matchit
-Plug 'vim-scripts/matchit.zip'
+" Plug 'vim-scripts/matchit.zip'
 " supertab for sync youcompleteme and ultisnips
 Plug 'ervandew/supertab'
 " emmet
@@ -167,6 +197,12 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'ap/vim-css-color'
 " vim-blade
 Plug 'jwalton512/vim-blade'
+" autoreload-browser
+Plug 'lordm/vim-browser-reload-linux'
+" repeat . vim
+Plug 'tpope/vim-repeat'
+" undotree
+Plug 'mbbill/undotree'
 
 " initialize plugin system
 call plug#end()
@@ -180,7 +216,38 @@ call plug#end()
 let NERDTreeMinimalUI=1
 let NERDTreeDirArrows=1
 let NERDTreeShowHidden=1
+let NERDTreeQuitOnOpen=1
+let NERDTreeAutoDeleteBuffer=1
 nnoremap <Leader>n :NERDTreeToggle<Enter>
+nnoremap <Leader>f :NERDTreeFind<cr>
+"autocmd StdinReadPre * let s:std_in=1
+"autocmd VimEnter * if argc() == 0 && !exists(“s:std_in”) | NERDTree | endif
+"autocmd bufenter * if (winnr(“$”) == 1 && exists(“b:NERDTreeType”) && b:NERDTreeType == “primary”) | q | endif
+
+" nerdtreecommenter
+" Add spaces after comment delimiters by default
+let g:NERDSpaceDelims = 1
+
+" Use compact syntax for prettified multi-line comments
+let g:NERDCompactSexyComs = 1
+
+" Align line-wise comment delimiters flush left instead of following code indentation
+let g:NERDDefaultAlign = 'left'
+
+" Set a language to use its alternate delimiters by default
+let g:NERDAltDelims_java = 1
+
+" Add your own custom formats or override the defaults
+let g:NERDCustomDelimiters = { 'c': { 'left': '/**','right': '*/' } }
+
+" Allow commenting and inverting empty lines (useful when commenting a region)
+let g:NERDCommentEmptyLines = 1
+
+" Enable trimming of trailing whitespace when uncommenting
+let g:NERDTrimTrailingWhitespace = 1
+
+" Enable NERDCommenterToggle to check all selected lines is commented or not 
+let g:NERDToggleCheckAllLines = 1
 
 " tagbar
 nmap <F8> :TagbarToggle<CR>
@@ -222,6 +289,56 @@ let g:blade_custom_directives = ['datetime', 'javascript']
 "
 " Define pairs of Blade directives. This variable is used for highlighting and indentation.
 let g:blade_custom_directives_pairs = {
-      \   'markdown': 'endmarkdown',
-      \   'cache': 'endcache',
-      \ }
+			\   'markdown': 'endmarkdown',
+			\   'cache': 'endcache',
+			\   'php': 'endphp',
+			\   'section': 'endsection',
+			\   'if': 'endif',
+			\ }
+" autoreload
+nnoremap <F10> :ChromeReload<CR>
+
+" FZF
+nnoremap <silent> <C-p> :FZF<CR>
+inoremap <silent> <C-p> :FZF<CR>
+" " cscope
+" function! Cscope(option, query)
+"   let color = '{ x = $1; $1 = ""; z = $3; $3 = ""; printf "\033[34m%s\033[0m:\033[31m%s\033[0m\011\033[37m%s\033[0m\n", x,z,$0; }'
+"   let opts = {
+"   \ 'source':  "cscope -dL" . a:option . " " . a:query . " | awk '" . color . "'",
+"   \ 'options': ['--ansi', '--prompt', '> ',
+"   \             '--multi', '--bind', 'alt-a:select-all,alt-d:deselect-all',
+"   \             '--color', 'fg:188,fg+:222,bg+:#3a3a3a,hl+:104'],
+"   \ 'down': '40%'
+"   \ }
+"   function! opts.sink(lines)
+"     let data = split(a:lines)
+"     let file = split(data[0], ":")
+"     execute 'e ' . '+' . file[1] . ' ' . file[0]
+"   endfunction
+"   call fzf#run(opts)
+" endfunction
+"
+" " Invoke command. 'g' is for call graph, kinda.
+" " nnoremap <silent> <Leader>g :call Cscope('3', expand('<cword>'))<CR>
+" nnoremap <silent> <C-p> :call Cscope('3', expand('<cword>'))<CR>
+
+" repeat . vim
+silent! call repeat#set("\<Plug>MyWonderfulMap", v:count)
+
+" matchup
+let g:loaded_matchit = 1
+" hi MatchParen cterm=bold ctermbg=none ctermfg=magenta
+" hi MatchParen cterm=none ctermbg=green ctermfg=blue
+" autocmd BufRead,BufNewFile * syn match parens /[(){}]/ | hi parens ctermfg=red
+" augroup vimrc
+"     autocmd!
+"     autocmd ColorScheme * highlight Normal ctermbg=NONE guifg=lightgrey guibg=black | highlight MatchParen cterm=bold ctermfg=red ctermbg=NONE gui=bold guifg=red guibg=NONE
+" augroup END
+
+" undotree
+nnoremap <F2> :UndotreeToggle<cr>
+if has("persistent_undo")
+    set undodir=$HOME."/.undotreedir"
+    set undofile
+endif
