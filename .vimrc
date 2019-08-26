@@ -160,8 +160,7 @@ Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-surround'
 " easymotion
 Plug 'easymotion/vim-easymotion'
-" ctrlp
-" Plug 'kien/ctrlp.vim'
+" fzf
 Plug 'junegunn/fzf'
 " nerd commenter
 Plug 'scrooloose/nerdcommenter'
@@ -181,8 +180,6 @@ Plug 'valloric/youcompleteme'
 Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
 " matchup
 Plug 'andymass/vim-matchup'
-" matchit
-" Plug 'vim-scripts/matchit.zip'
 " supertab for sync youcompleteme and ultisnips
 Plug 'ervandew/supertab'
 " emmet
