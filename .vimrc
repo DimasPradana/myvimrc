@@ -113,7 +113,6 @@ set statusline+=%M                        " modified [+] flag
 set statusline+=%#Cursor#               " colour
 set statusline+=%#CursorLine#     " colour
 " set statusline+=\ %t\                   " short file name
-set statusline+=%{FugitiveStatusline()}   " git branch
 set statusline+=\ %F\                   " full path file name
 set statusline+=%=                          " right align
 set statusline+=%#CursorLine#   " colour
@@ -204,8 +203,6 @@ Plug 'tpope/vim-repeat'
 Plug 'mbbill/undotree'
 " multiple cursor
 Plug 'terryma/vim-multiple-cursors'
-" git
-Plug 'tpope/vim-fugitive'
 
 " initialize plugin system
 call plug#end()
