@@ -17,12 +17,12 @@ if has('nvim')
 	" set guifont=inconsolata\-g\ g:h13
 else
 	" set guifont=Fira\ Code\ Retina\ 12
-	set guifont=inconsolata\-g\ medium\ 13
+	set guifont=inconsolata\-g\ medium\ 12
 endif
 set nobackup       "no backup files
 set nowritebackup  "only in case you don't want a backup file while editing
 set noswapfile     "no swap files
-set clipboard=unnamedplus
+" set clipboard=unnamedplus
 set showmode
 set showmatch
 set matchtime=3
@@ -112,7 +112,9 @@ set statusline+=%R                        " readonly flag
 set statusline+=%M                        " modified [+] flag
 set statusline+=%#Cursor#               " colour
 set statusline+=%#CursorLine#     " colour
-set statusline+=\ %t\                   " short file name
+" set statusline+=\ %t\                   " short file name
+set statusline+=%{FugitiveStatusline()}   " git branch
+set statusline+=\ %F\                   " full path file name
 set statusline+=%=                          " right align
 set statusline+=%#CursorLine#   " colour
 set statusline+=\ %Y\                   " file type
@@ -200,6 +202,10 @@ Plug 'lordm/vim-browser-reload-linux'
 Plug 'tpope/vim-repeat'
 " undotree
 Plug 'mbbill/undotree'
+" multiple cursor
+Plug 'terryma/vim-multiple-cursors'
+" git
+Plug 'tpope/vim-fugitive'
 
 " initialize plugin system
 call plug#end()
@@ -335,7 +341,19 @@ let g:loaded_matchit = 1
 
 " undotree
 nnoremap <F2> :UndotreeToggle<cr>
-if has("persistent_undo")
-    set undodir=$HOME."/.undotreedir"
-    set undofile
-endif
+" if has("persistent_undo")
+"     set undodir=$HOME."/.undotreedir"
+"     set undofile
+" endif
+
+"multiple cursor
+let g:multi_cursor_use_default_mapping=0
+" Default mapping
+let g:multi_cursor_start_word_key      = '<C-n>'
+let g:multi_cursor_select_all_word_key = '<A-n>'
+let g:multi_cursor_start_key           = 'g<C-n>'
+let g:multi_cursor_select_all_key      = 'g<A-n>'
+let g:multi_cursor_next_key            = '<C-n>'
+let g:multi_cursor_prev_key            = '<C-p>'
+let g:multi_cursor_skip_key            = '<C-x>'
+let g:multi_cursor_quit_key            = '<Esc>'
