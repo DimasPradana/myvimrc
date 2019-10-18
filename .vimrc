@@ -68,7 +68,14 @@ endif
 :inoremap <F5> <C-R>=strftime("%c")<CR>
 
 " run python from buffer
+
 :nnoremap <buffer> <F9> :exec '!python3' shellescape(@%, 1)<cr>
+" if (&filetype == 'PYTHON')
+"     :nnoremap <buffer> <F9> :exec '!python3' shellescape(@%, 1)<cr>
+" elseif (&filetype == 'GO')
+"     " :nnoremap <buffer> <F9> :GoRun <cr>
+"     :nnoremap <buffer> <F9> :echo "ini file g-->o" <cr>
+" endif
 " :nnoremap <buffer> <F9> :exec '!source env/bin/activate && python3' shellescape(@%, 1)<cr>
 
 " statusline
@@ -203,6 +210,15 @@ Plug 'tpope/vim-repeat'
 Plug 'mbbill/undotree'
 " multiple cursor
 Plug 'terryma/vim-multiple-cursors'
+" vim-go fatih
+" Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
+" another govim
+if has('nvim')
+	" Plug 'govim/govim'
+else
+	Plug 'govim/govim'
+endif
+" Plug 'govim/govim'
 
 " initialize plugin system
 call plug#end()
@@ -246,11 +262,48 @@ let g:NERDCommentEmptyLines = 1
 " Enable trimming of trailing whitespace when uncommenting
 let g:NERDTrimTrailingWhitespace = 1
 
-" Enable NERDCommenterToggle to check all selected lines is commented or not 
+" Enable NERDCommenterToggle to check all selected lines is commented or not
 let g:NERDToggleCheckAllLines = 1
 
 " tagbar
 nmap <F8> :TagbarToggle<CR>
+" let g:tagbar_type_go = {
+"     \ 'ctagstype': 'go',
+"     \ 'kinds' : [
+"         \'p:package',
+"         \'f:function',
+"         \'v:variables',
+"         \'t:type',
+"         \'c:const'
+"     \]
+" \}
+let g:tagbar_type_go = {
+	\ 'ctagstype' : 'go',
+	\ 'kinds'     : [
+		\ 'p:package',
+		\ 'i:imports:1',
+		\ 'c:constants',
+		\ 'v:variables',
+		\ 't:types',
+		\ 'n:interfaces',
+		\ 'w:fields',
+		\ 'e:embedded',
+		\ 'm:methods',
+		\ 'r:constructor',
+		\ 'f:functions'
+	\ ],
+	\ 'sro' : '.',
+	\ 'kind2scope' : {
+		\ 't' : 'ctype',
+		\ 'n' : 'ntype'
+	\ },
+	\ 'scope2kind' : {
+		\ 'ctype' : 't',
+		\ 'ntype' : 'n'
+	\ },
+	\ 'ctagsbin'  : 'gotags',
+	\ 'ctagsargs' : '-sort -silent'
+\ }
 
 " make YCM compatible with UltiSnips (using supertab)
 let g:ycm_key_list_select_completion=['<C-n>', '<Down>']
