@@ -183,7 +183,17 @@ Plug 'ntpeters/vim-better-whitespace'
 " tagbar
 Plug 'majutsushi/tagbar'
 " youcompleteme
-Plug 'valloric/youcompleteme'
+" Plug 'valloric/youcompleteme'
+" deoplete
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
+endif
+" deoplete golang
+Plug 'deoplete-plugins/deoplete-go', { 'do': 'make'}
 " python mode
 Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
 " matchup
@@ -216,7 +226,7 @@ Plug 'terryma/vim-multiple-cursors'
 if has('nvim')
 	" Plug 'govim/govim'
 else
-	Plug 'govim/govim'
+	" Plug 'govim/govim'
 endif
 " Plug 'govim/govim'
 
@@ -407,3 +417,5 @@ let g:multi_cursor_next_key            = '<C-n>'
 let g:multi_cursor_prev_key            = '<C-p>'
 let g:multi_cursor_skip_key            = '<C-x>'
 let g:multi_cursor_quit_key            = '<Esc>'
+" deoplete
+let g:deoplete#enable_at_startup = 1
