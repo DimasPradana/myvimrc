@@ -1,0 +1,123 @@
+{
+	"coc.preferences.bracketEnterImprove": true,
+	"coc.preferences.colorSupport": true,
+	"coc.preferences.currentFunctionSymbolAutoUpdate": true,
+	"coc.preferences.enableFloatHighlight": true,
+	"coc.preferences.extensionUpdateCheck": "never",
+	"coc.preferences.hoverTarget": "float",
+	"coc.preferences.previewAutoClose": true,
+	"coc.preferences.formatOnSaveFiletypes": [
+		"html",
+		"js",
+		"py",
+		"css",
+		"go",
+		"sh"
+	],
+	"codeLens.enable": true,
+	"codeLens.separator": "‣",
+	"diagnostic.enable": true,
+	"diagnostic.enableSign": true,
+	"diagnostic.errorSign": "ER",
+	"diagnostic.hintSign": "HI",
+	"diagnostic.infoSign": "IN",
+	"diagnostic.messageTarget": "float",
+	"diagnostic.refreshOnInsertMode": true,
+	"diagnostic.virtualText": true,
+	"diagnostic.warningSign": "WA",
+	"emmet.includeLanguages":{},
+	"languageserver": {
+		"golang": {
+			"command": "gopls",
+			"rootPatterns": ["go.mod", ".vim/", ".git/", ".hg/"],
+			"filetypes": ["go"],
+			"initializationOptions": {
+				"usePlaceholders": true
+			}
+		},
+		"python": {
+			"command": "python",
+			"args": [
+				"-mpyls",
+				"-vv",
+				"--log-file",
+				"/tmp/lsp_python.log"
+			],
+			"trace.server": "verbose",
+			"filetypes": [
+				"python"
+			],
+			"settings": {
+				"pyls": {
+					"enable": true,
+					"trace": {
+						"server": "verbose"
+					},
+					"commandPath": "",
+					"configurationSources": [
+						"pycodestyle"
+					],
+					"plugins": {
+						"jedi_completion": {
+							"enabled": true
+						},
+						"jedi_hover": {
+							"enabled": true
+						},
+						"jedi_references": {
+							"enabled": true
+						},
+						"jedi_signature_help": {
+							"enabled": true
+						},
+						"jedi_symbols": {
+							"enabled": true,
+							"all_scopes": true
+						},
+						"mccabe": {
+							"enabled": true,
+							"threshold": 15
+						},
+						"preload": {
+							"enabled": true
+						},
+						"pycodestyle": {
+							"enabled": true
+						},
+						"pydocstyle": {
+							"enabled": false,
+							"match": "(?!test_).*\\.py",
+							"matchDir": "[^\\.].*"
+						},
+						"pyflakes": {
+							"enabled": true
+						},
+						"rope_completion": {
+							"enabled": true
+						},
+						"yapf": {
+							"enabled": true
+						}
+					}
+				}
+			}
+		}
+	},
+	"signature.enable": true,
+	"signature.hideOnTextChange": true,
+	"signature.target": "float",
+	"signature.triggerSignatureWait": 50,
+	"suggest.acceptSuggestionOnCommitCharacter": true,
+	"suggest.autoTrigger": "always",
+	"suggest.floatEnable": true,
+	"suggest.highPrioritySourceLimit": 99,
+	"suggest.languageSourcePriority": 99,
+	"suggest.lowPrioritySourceLimit": 89,
+	"suggest.minTriggerInputLength": 1,
+	"suggest.noselect": true,
+	"suggest.timeout": 2000,
+	"suggest.triggerAfterInsertEnter": true,
+	"vimlsp.indexes.count": 2,
+	"vimlsp.indexes.runtimepath": true,
+	"vimlsp.suggest.fromRuntimepath": true
+}
